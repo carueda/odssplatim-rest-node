@@ -1,9 +1,0 @@
-{
-    "mongo": {
-      "host"      : "odss-test.shore.mbari.org",
-      "port"      : 27017,
-      "db"        : "odss",
-      "user"      : "odssadm",
-      "pw"        : "w1tHp0w3rT0ChaNg3!"
-    }
-}
