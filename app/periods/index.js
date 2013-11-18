@@ -1,5 +1,7 @@
 var logger = require('log4js').getLogger('periods');
 
+module.exports = periods;
+
 function periods(PeriodModel) {
 
     return {
@@ -22,5 +24,3 @@ function periods(PeriodModel) {
         }
     };
 }
-
-module.exports = periods;

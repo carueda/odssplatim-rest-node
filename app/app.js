@@ -17,14 +17,16 @@ mongoose.connect("mongodb://" +mongo.host + ":" + mongo.port + "/" + mongo.db, {
     pass: mongo.pw
 });
 
-var TokenModel    = require('./tokens/TokenModel')(mongoose);
+// the following for platforms, only needed in this standalone app
+var PlatformModel  = require('./platforms/PlatformModel')(mongoose);
+var platforms      = require('./platforms')(PlatformModel);
+//-
+
+var TokenModel    = require('./tokens/TokenModel')(mongoose, PlatformModel);
 var tokens        = require('./tokens')(TokenModel);
 
 var PeriodModel   = require('./periods/PeriodModel')(mongoose);
 var periods       = require('./periods')(PeriodModel);
-
-var platformModel  = require('./platforms/platformModel')(mongoose);
-var platforms      = require('./platforms')(platformModel);
 
 
 var app = express();
@@ -49,14 +51,16 @@ app.all('/*', function(req, res, next) {
 });
 
 // setup routes:
-
-app.get('/platforms',       platforms.findAll);
-app.get('/tokens',          tokens.findAll);
+app.get('/tokens',                    tokens.findAll);
+app.get('/timelines',                 tokens.timelines);
+app.get('/timelines/:platform_id',    tokens.timelineById);
 
 app.get('/periods',          periods.findAll);
 app.get('/periods/default',  periods.getDefault);
 app.get('/periods/holidays', periods.getHolidays);
 
+// the following for platforms only needed in this standalone app
+app.get('/platforms',  platforms.findAll);
 
 
 http.createServer(app).listen(app.get('port'), function(){

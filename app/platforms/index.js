@@ -1,5 +1,6 @@
 var logger = require('log4js').getLogger('platforms');
 
+module.exports = platforms;
 
 function platforms(PlatformModel) {
 
@@ -11,5 +12,3 @@ function platforms(PlatformModel) {
         }
     };
 }
-
-module.exports = platforms;

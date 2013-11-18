@@ -1,5 +1,7 @@
 var logger = require('log4js').getLogger('PeriodModel');
 
+module.exports = PeriodModel;
+
 function PeriodModel(mongoose) {
     var periodModel = mongoose.model('Period', new mongoose.Schema({
         start:        String,
@@ -55,5 +57,3 @@ function PeriodModel(mongoose) {
         }
     };
 }
-
-module.exports = PeriodModel;
