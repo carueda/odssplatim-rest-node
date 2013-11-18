@@ -46,7 +46,7 @@ if ('development' == app.get('env')) {
 // allow CORS
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
   next();
 });
 
@@ -58,6 +58,7 @@ app.get('/timelines/:platform_id',    tokens.timelineById);
 app.get('/periods',          periods.findAll);
 app.get('/periods/default',  periods.getDefault);
 app.get('/periods/holidays', periods.getHolidays);
+app.post('/periods',         periods.createPeriod);
 
 // the following for platforms only needed in this standalone app
 app.get('/platforms',  platforms.findAll);

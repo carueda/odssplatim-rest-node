@@ -21,6 +21,19 @@ function periods(PeriodModel) {
             PeriodModel.getHolidays(function(err, docs) {
                 res.send(docs);
             });
+        },
+
+        createPeriod: function(req, res, next){
+            var data = req.body;
+            logger.info("created: req.body=", req.body);
+            PeriodModel.createPeriod(data, function(err, created) {
+                if (err) {
+                    next(err);
+                }
+                else {
+                    res.send(created);
+                }
+            });
         }
     };
 }

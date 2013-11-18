@@ -54,6 +54,16 @@ function PeriodModel(mongoose) {
                 }
                 callback(err, docs)
             });
+        },
+
+        createPeriod: function(data, callback) {
+            logger.debug("creating period:", data);
+            periodModel.create(data, function(err, created) {
+                if (err) {
+                    logger.error("error creating period:", err);
+                }
+                callback(err, created)
+            });
         }
     };
 }
