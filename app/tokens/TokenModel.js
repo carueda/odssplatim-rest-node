@@ -68,10 +68,22 @@ function TokenModel(mongoose, PlatformModel) {
         });
     };
 
+    /** update token */
+    var update = function(token_id, data, callback) {
+        logger.debug("updating token: token_id=", token_id, data);
+        model.findByIdAndUpdate(token_id, data, function(err, updated) {
+            if (err) {
+                logger.error("error updating token:", err);
+            }
+            callback(err, updated)
+        });
+    };
+
     return {
         findAll:        findAll,
         timelines:      timelines,
         timelineById:   timelineById,
-        create:         create
+        create:         create,
+        update:         update
     };
 }

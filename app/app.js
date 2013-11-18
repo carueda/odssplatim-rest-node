@@ -47,6 +47,7 @@ if ('development' == app.get('env')) {
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
   next();
 });
 
@@ -55,6 +56,7 @@ app.get('/tokens',                    tokens.findAll);
 app.get('/timelines',                 tokens.timelines);
 app.get('/timelines/:platform_id',    tokens.timelineById);
 app.post('/tokens',                   tokens.create);
+app.put('/tokens/:token_id',          tokens.update);
 
 app.get('/periods',          periods.findAll);
 app.get('/periods/default',  periods.getDefault);

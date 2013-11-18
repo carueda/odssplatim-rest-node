@@ -36,6 +36,20 @@ function tokens(TokenModel) {
                     res.send(created);
                 }
             });
+        },
+
+        update: function(req, res, next){
+            var token_id = req.params.token_id;
+            var data = req.body;
+            logger.info("update token: token_id=", token_id, "req.body=", req.body);
+            TokenModel.update(token_id, data, function(err, updated) {
+                if (err) {
+                    next(err);
+                }
+                else {
+                    res.send(updated);
+                }
+            });
         }
     };
 }
