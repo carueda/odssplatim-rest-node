@@ -57,6 +57,7 @@ app.get('/timelines',                 tokens.timelines);
 app.get('/timelines/:platform_id',    tokens.timelineById);
 app.post('/tokens',                   tokens.create);
 app.put('/tokens/:token_id',          tokens.update);
+app.del('/tokens/:token_id',          tokens.del);
 
 app.get('/periods',          periods.findAll);
 app.get('/periods/default',  periods.getDefault);

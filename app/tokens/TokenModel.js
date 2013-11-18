@@ -79,11 +79,23 @@ function TokenModel(mongoose, PlatformModel) {
         });
     };
 
+    /** delete token */
+    var del = function(token_id, callback) {
+        logger.debug("deleting token: token_id=", token_id);
+        model.findByIdAndRemove(token_id, function(err) {
+            if (err) {
+                logger.error("error deleting token:", err);
+            }
+            callback(err)
+        });
+    };
+
     return {
         findAll:        findAll,
         timelines:      timelines,
         timelineById:   timelineById,
         create:         create,
-        update:         update
+        update:         update,
+        del:            del
     };
 }

@@ -50,6 +50,19 @@ function tokens(TokenModel) {
                     res.send(updated);
                 }
             });
+        },
+
+        del: function(req, res, next){
+            var token_id = req.params.token_id;
+            logger.info("deleting token: token_id=", token_id, "req.body=", req.body);
+            TokenModel.del(token_id, function(err) {
+                if (err) {
+                    next(err);
+                }
+                else {
+                    res.json({tokenDeleted: token_id});
+                }
+            });
         }
     };
 }
