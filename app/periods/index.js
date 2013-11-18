@@ -25,7 +25,7 @@ function periods(PeriodModel) {
 
         createPeriod: function(req, res, next){
             var data = req.body;
-            logger.info("created: req.body=", req.body);
+            logger.info("createPeriod: req.body=", req.body);
             PeriodModel.createPeriod(data, function(err, created) {
                 if (err) {
                     next(err);
