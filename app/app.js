@@ -54,6 +54,7 @@ app.all('/*', function(req, res, next) {
 app.get('/tokens',                    tokens.findAll);
 app.get('/timelines',                 tokens.timelines);
 app.get('/timelines/:platform_id',    tokens.timelineById);
+app.post('/tokens',                   tokens.create);
 
 app.get('/periods',          periods.findAll);
 app.get('/periods/default',  periods.getDefault);

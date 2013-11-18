@@ -23,6 +23,19 @@ function tokens(TokenModel) {
             TokenModel.timelineById(platform_id, function(err, docs) {
                 res.send(docs);
             });
+        },
+
+        create: function(req, res, next){
+            var data = req.body;
+            logger.info("create token: req.body=", req.body);
+            TokenModel.create(data, function(err, created) {
+                if (err) {
+                    next(err);
+                }
+                else {
+                    res.send(created);
+                }
+            });
         }
     };
 }

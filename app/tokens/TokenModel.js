@@ -57,9 +57,21 @@ function TokenModel(mongoose, PlatformModel) {
         });
     };
 
+    /** create token */
+    var create = function(data, callback) {
+        logger.debug("creating token:", data);
+        model.create(data, function(err, created) {
+            if (err) {
+                logger.error("error creating token:", err);
+            }
+            callback(err, created)
+        });
+    };
+
     return {
         findAll:        findAll,
         timelines:      timelines,
-        timelineById:   timelineById
+        timelineById:   timelineById,
+        create:         create
     };
 }
