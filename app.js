@@ -17,7 +17,7 @@ var express   = require('express');
 var http      = require('http');
 var mongoose  = require('mongoose');
 var mongoCfg  = require("./config").mongo;
-var platim    = require('./platim'); // for the setup of the service itself.
+var platim    = require('./platim');
 
 
 // connect mongoose to the database:

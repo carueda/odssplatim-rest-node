@@ -3,7 +3,6 @@
 ## Configure & Run as standalone app ##
 
 ```sh
-$ cd platim/
 $ cp template.config.json config.json
 $ vi config.json  # to set properties
 $ node app
