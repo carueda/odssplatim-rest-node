@@ -17,6 +17,8 @@ var express   = require('express');
 var http      = require('http');
 var mongoose  = require('mongoose');
 var mongoCfg  = require("./config").mongo;
+var platim    = require('./platim'); // for the setup of the service itself.
+
 
 // connect mongoose to the database:
 logger.debug("connecting:", mongoCfg.uri);
@@ -31,14 +33,6 @@ var Platform = mongoose.model('Platform', new mongoose.Schema({
     abbreviation: {type: String},
     typeName: {type: String}
 }));
-
-// platform timeline models:
-require('./periods/models');
-require('./tokens/models');
-
-// platform timeline controllers:
-var periods  = require('./periods');
-var tokens   = require('./tokens');
 
 // set up application:
 
@@ -64,20 +58,6 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
-// setup routes:
-app.get('/tokens',                    tokens.findAll);
-app.get('/timelines',                 tokens.timelines);
-app.get('/timelines/:platform_id',    tokens.timelineById);
-app.post('/tokens',                   tokens.create);
-app.put('/tokens/:token_id',          tokens.update);
-app.del('/tokens/:token_id',          tokens.del);
-
-app.get('/periods',                   periods.findAll);
-app.get('/periods/default',           periods.getDefault);
-app.get('/periods/holidays',          periods.getHolidays);
-app.post('/periods',                  periods.createPeriod);
-app.del('/periods/:period_id',        periods.deletePeriod);
-
 app.get('/platforms', function(req, res, next) {
     logger.debug("getting platforms:");
     Platform.find({}, function(err, docs) {
@@ -89,6 +69,9 @@ app.get('/platforms', function(req, res, next) {
         }
     });
 });
+
+// setup platim service:
+platim.setup(app);
 
 
 http.createServer(app).listen(app.get('port'), function(){
