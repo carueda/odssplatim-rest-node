@@ -1,9 +1,9 @@
 {
     "mongo": {
-      "host"      : "localhost",
-      "port"      : 27017,
-      "db"        : "odss",
-      "user"      : "user",
-      "pw"        : "pass"
+        "uri": "mongodb://localhost:27017/odss",
+        "options": {
+            "user" : "user",
+            "pass" : "pass"
+        }
     }
 }
