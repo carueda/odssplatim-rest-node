@@ -45,8 +45,8 @@ function setup(app, routePrefix) {
 
     // setup routes:
     app.get( routePrefix + 'tokens',                   tokens.findAll);
-    app.get( routePrefix + 'timelines',                tokens.timelines);
-    app.get( routePrefix + 'timelines/:platform_id',   tokens.timelineById);
+    app.get( routePrefix + 'tokens/timelines',         tokens.timelines);
+    app.get( routePrefix + 'tokens/timelines/:platform_id', tokens.timelineById);
     app.post(routePrefix + 'tokens',                   tokens.create);
     app.put( routePrefix + 'tokens/:token_id',         tokens.update);
     app.del( routePrefix + 'tokens/:token_id',         tokens.del);
