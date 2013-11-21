@@ -22,6 +22,8 @@ var DefaultPeriod = mongoose.model('DefaultPeriod');
 module.exports = {
     findAll:        findAll,
     getDefault:     getDefault,
+    setDefault:     setDefault,
+    delDefault:     delDefault,
     getHolidays:    getHolidays,
     createPeriod:   createPeriod,
     deletePeriod:   deletePeriod
@@ -60,6 +62,44 @@ function getDefault(req, res, next) {
         }
         else {
             res.send(docs);
+        }
+    });
+}
+
+/**
+ * Sets the default period.
+ *
+ * @method  setDefault
+ */
+function setDefault(req, res, next) {
+    var period_id = req.params.period_id;
+    logger.debug("setting default period:", period_id);
+    var query = {'defaultPeriodId': {'$exists': true}};
+    var obj   = {'defaultPeriodId': period_id};
+    DefaultPeriod.update(query, obj, {'upsert': true}, function(err) {
+        if (err) {
+            return next(err);
+        }
+        else {
+            res.json({defaultPeriodSet: period_id});
+        }
+    });
+}
+
+/**
+ * Deletes the default period.
+ *
+ * @method  delDefault
+ */
+function delDefault(req, res, next) {
+    logger.debug("deleting default period");
+    var query = {'defaultPeriodId': {'$exists': true}};
+    DefaultPeriod.remove(query, function(err) {
+        if (err) {
+            return next(err);
+        }
+        else {
+            res.json({defaultPeriodRemoved: "if any"});
         }
     });
 }

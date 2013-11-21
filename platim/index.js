@@ -53,6 +53,8 @@ function setup(app, routePrefix) {
 
     app.get( routePrefix + 'periods',                  periods.findAll);
     app.get( routePrefix + 'periods/default',          periods.getDefault);
+    app.put( routePrefix + 'periods/default/:period_id', periods.setDefault);
+    app.del( routePrefix + 'periods/default',          periods.delDefault);
     app.get( routePrefix + 'periods/holidays',         periods.getHolidays);
     app.post(routePrefix + 'periods',                  periods.createPeriod);
     app.del( routePrefix + 'periods/:period_id',       periods.deletePeriod);
